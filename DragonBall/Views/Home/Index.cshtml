@@ -1,0 +1,44 @@
+﻿@using Class.Models
+@model Character
+
+@{
+    ViewData["Title"] = "Detalle del Personaje";
+}
+
+<h1 class="my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>@Model.Name</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-4"><strong>Ki:</strong></div>
+                        <div class="col-8">@Model.Ki</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4"><strong>Max Ki:</strong></div>
+                        <div class="col-8">@Model.MaxKi</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4"><strong>Raza:</strong></div>
+                        <div class="col-8">@Model.Race</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4"><strong>Género:</strong></div>
+                        <div class="col-8">@Model.Gender</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4"><strong>Imagen:</strong></div>
+                        <div class="col-8">
+                            <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded" style="max-width: 200px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
