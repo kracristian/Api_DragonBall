@@ -6,47 +6,71 @@
 }
 
 <div class="container my-4">
-    <h1>@Model.Name</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded" />
-        </div>
-        <div class="col-md-6">
-            <h3>Información Básica</h3>
-            <p><strong>Raza:</strong> @Model.Race</p>
-            <p><strong>Género:</strong> @Model.Gender</p>
-            <p><strong>Ki:</strong> @Model.Ki</p>
-            <p><strong>Max Ki:</strong> @Model.MaxKi</p>
-            <p><strong>Afiliación:</strong> @Model.Affiliation</p>
-            <h3>Descripción</h3>
-            <p>@Model.Description</p>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <h3>Planeta de Origen</h3>
-            <img src="@Model.OriginPlanet.Image" alt="@Model.OriginPlanet.Name" class="img-fluid rounded" style="max-width: 300px;" />
-            <p><strong>Nombre:</strong> @Model.OriginPlanet.Name</p>
-            <p><strong>Descripción:</strong> @Model.OriginPlanet.Description</p>
-            <p><strong>¿Destruido?:</strong> @(Model.OriginPlanet.IsDestroyed ? "Sí" : "No")</p>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <h3>Transformaciones</h3>
-            <div class="row">
-                @foreach (var transformation in Model.Transformations)
-                {
-                    <div class="col-md-4 mb-4">
-                        <div class="card" style="height: 100%;">
-                            <img src="@transformation.Image" alt="@transformation.Name" class="card-img-top img-fluid rounded" style="height: 100%; object-fit: cover;" />
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="text-left mt-4 ml-3">
+                        <button id="backButton" style="margin-left:3%" class="btn btn-primary">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-md-6 text-center">
+                            <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded" style="max-height: 800px; object-fit: cover;" />
+                        </div>
+                        <div class="col-md-6">
                             <div class="card-body">
-                                <h5 class="card-title">@transformation.Name</h5>
-                                <p class="card-text"><strong>Ki:</strong> @transformation.Ki</p>
+                                <h3>Información Básica</h3>
+                                <p><strong>Nombre:</strong> @Model.Name</p>
+                                <p><strong>Raza:</strong> @Model.Race</p>
+                                <p><strong>Género:</strong> @Model.Gender</p>
+                                <p><strong>Ki:</strong> @Model.Ki</p>
+                                <p><strong>Max Ki:</strong> @Model.MaxKi</p>
+                                <p><strong>Afiliación:</strong> @Model.Affiliation</p>
+                                <h3>Descripción</h3>
+                                <p>@Model.Description</p>
                             </div>
                         </div>
                     </div>
-                }
+
+
+                    <div class="row no-gutters">
+                        <div class="col-md-6 text-center">
+                            <h3>Planeta de Origen</h3>
+                            <img src="@Model.OriginPlanet.Image" alt="@Model.OriginPlanet.Name" class="img-fluid rounded" style="max-width: 300px;" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p><strong>Nombre:</strong> @Model.OriginPlanet.Name</p>
+                                <p><strong>Descripción:</strong> @Model.OriginPlanet.Description</p>
+                                <p><strong>¿Destruido?:</strong> @(Model.OriginPlanet.IsDestroyed ? "Sí" : "No")</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3 class="text-center">Transformaciones</h3>
+                        <div class="row">
+                            @foreach (var transformation in Model.Transformations)
+                            {
+                                <div class="col-md-3 mb-4">
+                                    <div class="card h-100 d-flex flex-column">
+                                        <div class="card-img-container" style="flex: 1 1 auto; overflow: hidden;">
+                                            <img src="@transformation.Image" alt="@transformation.Name" class="card-img-top img-fluid rounded" style="width: 100%; height: auto; object-fit: cover;" />
+                                        </div>
+                                        <div class="card-body d-flex flex-column" style="flex: 0 1 auto;">
+                                            <h5 class="card-title">@transformation.Name</h5>
+                                            <p class="card-text"><strong>Ki:</strong> @transformation.Ki</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -60,7 +84,10 @@
         transition: transform 0.3s ease;
     }
 
-        .card:hover {
-            transform: scale(1.05);
-        }
 </style>
+
+<script>
+    document.getElementById('backButton').addEventListener('click', function () {
+        window.history.back();
+    });
+</script>

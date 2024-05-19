@@ -1,6 +1,7 @@
 using Api_DragonBall.Controllers;
 using Class.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class HomeController : Controller
 {
@@ -13,15 +14,7 @@ public class HomeController : Controller
         _api_DragonBall = api_DragonBall ?? throw new ArgumentNullException(nameof(api_DragonBall));
     }
 
-    public IActionResult Index()
-    {
-        return RedirectToAction("PeronsajeId");
-
-        Character character = _api_DragonBall.ObtenerPersonaje(1);
-        return View(character);
-    }
-
-    public async Task<IActionResult> Index_2(int page = 1, int itemsPerPage = 12, string search = "")
+    public async Task<IActionResult> Index(int page = 1, int itemsPerPage = 12, string search = "")
     {
         if (search != "")
         {
@@ -42,9 +35,5 @@ public class HomeController : Controller
         Character character = _api_DragonBall.ObtenerPersonaje(personaje);
         return View(character);
     }
-
-
-
-
 
 }
