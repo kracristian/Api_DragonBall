@@ -15,7 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return RedirectToAction("Index_2");
+        return RedirectToAction("PeronsajeId");
 
         Character character = _api_DragonBall.ObtenerPersonaje(1);
         return View(character);
@@ -37,7 +37,7 @@ public class HomeController : Controller
         }
     }
 
-    public IActionResult PeronsajeId(int personaje = 5)
+    public IActionResult PeronsajeId(int personaje = 1)
     {
         Character character = _api_DragonBall.ObtenerPersonaje(personaje);
         return View(character);

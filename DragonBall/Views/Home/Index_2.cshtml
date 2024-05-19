@@ -93,7 +93,9 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <img src="@character.Image" alt="@character.Name" class="img-fluid rounded" />
+                                    <a href="@Url.Action("PeronsajeId", "Home", new { personaje = character.Id })">
+                                        <img src="@character.Image" alt="@character.Name" class="img-fluid rounded" />
+                                    </a>
                                 </div>
                             </div>
                         </div>

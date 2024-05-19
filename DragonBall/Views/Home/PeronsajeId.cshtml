@@ -37,9 +37,9 @@
             <div class="row">
                 @foreach (var transformation in Model.Transformations)
                 {
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <img src="@transformation.Image" alt="@transformation.Name" class="card-img-top img-fluid rounded" />
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="height: 100%;">
+                            <img src="@transformation.Image" alt="@transformation.Name" class="card-img-top img-fluid rounded" style="height: 100%; object-fit: cover;" />
                             <div class="card-body">
                                 <h5 class="card-title">@transformation.Name</h5>
                                 <p class="card-text"><strong>Ki:</strong> @transformation.Ki</p>
@@ -53,11 +53,14 @@
 </div>
 
 <style>
-    .card:hover {
-        transform: scale(1.05);
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
     }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
 </style>
-
-
-
