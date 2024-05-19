@@ -15,8 +15,36 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        return RedirectToAction("Index_2");
+
         Character character = _api_DragonBall.ObtenerPersonaje(1);
         return View(character);
     }
+
+    public async Task<IActionResult> Index_2(int page = 1, int itemsPerPage = 12, string search = "")
+    {
+        if (search != "")
+        {
+            List<Character> characterResponse = await _api_DragonBall.SearchCharacters(search);
+            return View(characterResponse);
+        }
+        else
+        {
+            DragonBallResponse characterResponse = await _api_DragonBall.GetCharacterPage(page, itemsPerPage);
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(characterResponse.Meta.TotalItems / (double)itemsPerPage);
+            return View(characterResponse.Items);
+        }
+    }
+
+    public IActionResult PeronsajeId(int personaje = 5)
+    {
+        Character character = _api_DragonBall.ObtenerPersonaje(personaje);
+        return View(character);
+    }
+
+
+
+
 
 }

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Class.Models;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace Api_DragonBall.Controllers
 {
@@ -19,32 +21,29 @@ namespace Api_DragonBall.Controllers
         }
 
         [HttpGet("{page},{limit}")]
-        public async Task<IActionResult> GetCharacterPage(int page = 1, int limit = 10)
+        public async Task<DragonBallResponse> GetCharacterPage(int page = 1, int limit = 12)
         {
             try
             {
-                // Hacer la solicitud HTTP al servicio web
                 var response = await _httpClient.GetAsync($"https://dragonball-api.com/api/characters?page={page}&limit={limit}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Leer y deserializar el contenido JSON de la respuesta
                     var characterJson = await response.Content.ReadAsStringAsync();
-                    var character = JsonConvert.DeserializeObject<DragonBallResponse>(characterJson);
+                    var characterResponse = JsonConvert.DeserializeObject<DragonBallResponse>(characterJson);
 
-                    return Ok(character);
+                    return characterResponse;
                 }
                 else
                 {
-                    return NotFound();
+                    return null; // O lanzar una excepción según tu lógica de manejo de errores
                 }
             }
             catch (HttpRequestException)
             {
-                return StatusCode(500, "Error al conectarse al servicio"); // Manejar el error de conexión de alguna otra manera
+                return null; // O lanzar una excepción según tu lógica de manejo de errores
             }
         }
-
 
         [HttpGet("{id}")]
         public Character ObtenerPersonaje(int id)
@@ -58,18 +57,14 @@ namespace Api_DragonBall.Controllers
                     // Leer y deserializar el contenido JSON de la respuesta
                     var characterJson = response.Content.ReadAsStringAsync().Result;
                     var character = JsonConvert.DeserializeObject<Character>(characterJson);
-                    Console.WriteLine("llegó acá 1");
                     return character;
                 }
                 else if (response.StatusCode == HttpStatusCode.NotFound)
                 {
-                    Console.WriteLine("llegó acá 2");
-
-                    return null; 
+                    return null;
                 }
                 else
                 {
-                    Console.WriteLine("llegó acá 3");
                     throw new Exception("Error al obtener el personaje");
                 }
             }
@@ -80,8 +75,32 @@ namespace Api_DragonBall.Controllers
             }
         }
 
+        [HttpGet("{search}")]
+        public async Task<List<Character>> SearchCharacters(string search)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"https://dragonball-api.com/api/characters?name={search}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var characterJson = await response.Content.ReadAsStringAsync();
+                    var characterResponse = JsonConvert.DeserializeObject<List<Character>>(characterJson);
 
 
+
+                    return characterResponse;
+                }
+                else
+                {
+                    return null; // O lanzar una excepción según tu lógica de manejo de errores
+                }
+            }
+            catch (HttpRequestException)
+            {
+                return null; // O lanzar una excepción según tu lógica de manejo de errores
+            }
+        }
 
     }
 }

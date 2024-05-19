@@ -1,0 +1,63 @@
+﻿@using Class.Models
+@model Character
+
+@{
+    ViewData["Title"] = "Detalles del Personaje";
+}
+
+<div class="container my-4">
+    <h1>@Model.Name</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.Image" alt="@Model.Name" class="img-fluid rounded" />
+        </div>
+        <div class="col-md-6">
+            <h3>Información Básica</h3>
+            <p><strong>Raza:</strong> @Model.Race</p>
+            <p><strong>Género:</strong> @Model.Gender</p>
+            <p><strong>Ki:</strong> @Model.Ki</p>
+            <p><strong>Max Ki:</strong> @Model.MaxKi</p>
+            <p><strong>Afiliación:</strong> @Model.Affiliation</p>
+            <h3>Descripción</h3>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Planeta de Origen</h3>
+            <img src="@Model.OriginPlanet.Image" alt="@Model.OriginPlanet.Name" class="img-fluid rounded" style="max-width: 300px;" />
+            <p><strong>Nombre:</strong> @Model.OriginPlanet.Name</p>
+            <p><strong>Descripción:</strong> @Model.OriginPlanet.Description</p>
+            <p><strong>¿Destruido?:</strong> @(Model.OriginPlanet.IsDestroyed ? "Sí" : "No")</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Transformaciones</h3>
+            <div class="row">
+                @foreach (var transformation in Model.Transformations)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="@transformation.Image" alt="@transformation.Name" class="card-img-top img-fluid rounded" />
+                            <div class="card-body">
+                                <h5 class="card-title">@transformation.Name</h5>
+                                <p class="card-text"><strong>Ki:</strong> @transformation.Ki</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+</style>
+
+
+
