@@ -8,8 +8,6 @@
     var search = ViewBag.Search ?? "";
 }
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +15,7 @@
     <style>
         .card {
             width: 250px;
-            height: 450px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -38,7 +36,7 @@
             }
 
             .card:hover {
-                transform: scale(1.05); /* Escalar la tarjeta cuando se pasa el cursor */
+                transform: scale(1.1); /* Aumenta tamaño de la tarjeta cuando se pasa el cursor */
             }
 
         .custom-logo {
@@ -47,12 +45,8 @@
         }
 
         body {
-            background-color: #523D78; /* Fondo negro */
-            /* color: #fff; /* Texto blanco */ */
+            background-color: #8E79CE; 
         }
-
-
-
     </style>
 </head>
 <body>
@@ -82,23 +76,23 @@
                             <h2>@character.Name</h2>
                         </div>
                         <div class="card-body">
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-6"><strong>Raza:</strong></div>
                                 <div class="col-6">@character.Race</div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-6"><strong>Género:</strong></div>
                                 <div class="col-6">@character.Gender</div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-6"><strong>KI:</strong></div>
                                 <div class="col-6">@character.Ki</div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-6"><strong>Afiliación:</strong></div>
                                 <div class="col-6">@character.Affiliation</div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-6">
                                 <div class="col-12">
                                     <a href="@Url.Action("PeronsajeId", "Home", new { personaje = character.Id })">
                                         <img src="@character.Image" alt="@character.Name" class="img-fluid rounded" />
@@ -143,4 +137,3 @@
     </div>
 
 </body>
-</html>
